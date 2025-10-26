@@ -7,7 +7,7 @@ import co.edu.unbosque.formula1.model.TipoPenalizacion;
 import co.edu.unbosque.formula1.repository.TipoPenalizacionRepository;
 
 @Service
-public class TipoPenalizacionServise {
+public class TipoPenalizacionService {
 
 	@Autowired
 

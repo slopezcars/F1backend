@@ -7,7 +7,7 @@ import co.edu.unbosque.formula1.model.PenTipp;
 import co.edu.unbosque.formula1.repository.PenTippRepository;
 
 @Service
-public class PenTippServise {
+public class PenTippService {
 	
 	@Autowired
 

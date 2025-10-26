@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unbosque.formula1.model.Penalizacion;
-import co.edu.unbosque.formula1.service.PenalizacionServise;
+import co.edu.unbosque.formula1.service.PenalizacionService;
 
 @RestController
 @RequestMapping("/penalizacion")
@@ -17,7 +17,7 @@ import co.edu.unbosque.formula1.service.PenalizacionServise;
 public class PenalizacionController {
 	
 	@Autowired
-	private PenalizacionServise penalizacionServise;
+	private PenalizacionService penalizacionServise;
 
 	@PostMapping
 

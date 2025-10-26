@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unbosque.formula1.model.PenTipp;
-import co.edu.unbosque.formula1.service.PenTippServise;
+import co.edu.unbosque.formula1.service.PenTippService;
 
 @RestController
 @RequestMapping("/pentipp")
@@ -17,7 +17,7 @@ import co.edu.unbosque.formula1.service.PenTippServise;
 public class PenTippController {
 	
 	@Autowired
-	private PenTippServise penTippServise;
+	private PenTippService penTippServise;
 
 	@PostMapping
 
