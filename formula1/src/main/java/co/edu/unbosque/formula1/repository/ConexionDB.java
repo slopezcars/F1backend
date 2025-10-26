@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConexionDB {
 
-	private static final String URL = "jdbc:mysql://172.20.36.228:3306/formula1";
+	private static final String URL = "jdbc:mysql://192.168.20.36:3306/formula1";
 	private static final String USURARIO= "sofi";
 	private static final String CONTRASENIA = "formula1";
 	
