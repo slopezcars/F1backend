@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package co.edu.unbosque.formula1.repository;
 
 import java.sql.Connection;
@@ -38,4 +38,4 @@ public class ConexionDB {
 		return DriverManager.getConnection(URL,USURARIO,CONTRASENIA);
 	}
 }
->>>>>>> branch 'main' of https://github.com/slopezcars/F1backend.git
+
