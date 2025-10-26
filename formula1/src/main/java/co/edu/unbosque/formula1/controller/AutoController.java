@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unbosque.formula1.model.Auto;
-import co.edu.unbosque.formula1.service.AutoService;
+
+import co.edu.unbosque.formula1.model.Circuito;
+import co.edu.unbosque.formula1.service.CircuitoService;
 
 @RestController
 @RequestMapping("/auto")
@@ -18,10 +19,10 @@ import co.edu.unbosque.formula1.service.AutoService;
 public class AutoController {
 
 	@Autowired
-	private AutoService autoService;
+    private CircuitoService circuitoService;
 
-	@PostMapping("/crearauto")
-	public ResponseEntity<Boolean> crearauto(Auto auto) {
-		return new ResponseEntity<>(autoService.crearauto(auto), HttpStatus.ACCEPTED);
-	}
+    @PostMapping("/crearcircuito")
+    public ResponseEntity<Boolean> crearcircuito(Circuito circuito) {
+        return new ResponseEntity<>(circuitoService.crearCircuito(circuito), HttpStatus.ACCEPTED);
+    }
 }
