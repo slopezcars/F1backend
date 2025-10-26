@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unbosque.formula1.model.TipoPenalizacion;
-import co.edu.unbosque.formula1.service.TipoPenalizacionService;
+import co.edu.unbosque.formula1.model.Auto;
+import co.edu.unbosque.formula1.service.AutoService;
 
 @RestController
-@RequestMapping("/tipopenalizacion")
+@RequestMapping("/auto")
 @CrossOrigin(origins = { "*" })
-public class TipoPenalizacionController {
+
+public class AutoController {
 
 	@Autowired
-	private TipoPenalizacionService tipopenalizacionService;
+	private AutoService autoService;
 
-	@PostMapping("/creartipopenalizacion")
-	public ResponseEntity<Boolean> creartipopenalizacion(TipoPenalizacion tipopenalizacion) {
-		return new ResponseEntity<>(tipopenalizacionService.creartipopenalizacion(tipopenalizacion),
-				HttpStatus.ACCEPTED);
+	@PostMapping("/crearauto")
+	public ResponseEntity<Boolean> crearauto(Auto auto) {
+		return new ResponseEntity<>(autoService.crearauto(auto), HttpStatus.ACCEPTED);
 	}
 }
