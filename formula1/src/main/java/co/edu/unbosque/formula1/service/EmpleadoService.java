@@ -9,12 +9,11 @@ import co.edu.unbosque.formula1.repository.EmpleadoRepository;
 @Service
 public class EmpleadoService {
 
-@Autowired
-private EmpleadoRepository empleadoRepository;
+	@Autowired
+	private EmpleadoRepository empleadoRepository;
 
-public boolean crearempleado(Empleado empleado) {
-	return empleadoRepository.crearempleado(empleado);
-}
-
+	public boolean crearempleado(Empleado empleado) {
+		return empleadoRepository.crearempleado(empleado);
+	}
 
 }

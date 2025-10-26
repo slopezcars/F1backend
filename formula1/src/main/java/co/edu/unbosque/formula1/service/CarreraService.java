@@ -8,15 +8,10 @@ import co.edu.unbosque.formula1.repository.CarreraRepository;
 
 @Service
 public class CarreraService {
-
 	@Autowired
-
 	private CarreraRepository carreraRepository;
 
 	public boolean crearcarrera(Carrera carrera) {
-
 		return carreraRepository.crearcarrera(carrera);
-
 	}
-
 }

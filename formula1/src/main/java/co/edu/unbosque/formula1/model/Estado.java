@@ -1,15 +1,15 @@
 package co.edu.unbosque.formula1.model;
 
 public class Estado {
-	
-	private boolean  idEstado;
+
+	private boolean idEstado;
 	private String nombre;
-	
+
 	public Estado() {
-		
+
 	}
 
-	public Estado( String nombre) {
+	public Estado(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -28,6 +28,5 @@ public class Estado {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
 
 }

@@ -8,22 +8,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unbosque.formula1.model.Carrera;
-import co.edu.unbosque.formula1.service.CarreraService;
+import co.edu.unbosque.formula1.model.TipoPenalizacion;
+import co.edu.unbosque.formula1.service.TipoPenalizacionService;
 
 @RestController
-@RequestMapping("/carrera")
+@RequestMapping("/tipopenalizacion")
 @CrossOrigin(origins = { "*" })
-
-public class CarreraController {
+public class TipoPenalizacionController {
 
 	@Autowired
-	private CarreraService carreraService;
+	private TipoPenalizacionService tipopenalizacionService;
 
-	@PostMapping
-
-	public ResponseEntity<Boolean> crearcarrera(Carrera carrera) {
-		return new ResponseEntity<>(carreraService.crearcarrera(carrera), HttpStatus.ACCEPTED);
-
+	@PostMapping("/creartipopenalizacion")
+	public ResponseEntity<Boolean> creartipopenalizacion(TipoPenalizacion tipopenalizacion) {
+		return new ResponseEntity<>(tipopenalizacionService.creartipopenalizacion(tipopenalizacion),
+				HttpStatus.ACCEPTED);
 	}
 }

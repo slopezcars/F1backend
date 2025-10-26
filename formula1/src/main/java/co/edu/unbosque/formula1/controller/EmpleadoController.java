@@ -13,16 +13,15 @@ import co.edu.unbosque.formula1.service.EmpleadoService;
 
 @RestController
 @RequestMapping("/empleado")
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = { "*" })
 public class EmpleadoController {
-	
+
 	@Autowired
 	private EmpleadoService empleadoService;
+
 	@PostMapping("/crearempleado")
 	public ResponseEntity<Boolean> crearempleado(Empleado empleado) {
-		return new ResponseEntity<>(empleadoService.crearempleado(empleado),HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(empleadoService.crearempleado(empleado), HttpStatus.ACCEPTED);
 	}
-	
-	
 
 }

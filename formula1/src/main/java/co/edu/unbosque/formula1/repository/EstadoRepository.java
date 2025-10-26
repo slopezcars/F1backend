@@ -11,7 +11,7 @@ import co.edu.unbosque.formula1.model.Estado;
 
 @Repository
 public class EstadoRepository {
-	
+
 	@Autowired
 	private ConexionDB conexionDB;
 
@@ -22,9 +22,8 @@ public class EstadoRepository {
 		try (Connection connection = conexionDB.obtenerConexion();
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 
-		
 			statement.setString(1, estado.getNombre());
-			
+
 			int filasAfectadas = statement.executeUpdate();
 			return filasAfectadas > 0;
 
@@ -33,7 +32,5 @@ public class EstadoRepository {
 			return false;
 		}
 	}
-	
-	
 
 }

@@ -15,7 +15,7 @@ import co.edu.unbosque.formula1.service.EstadoServise;
 @RequestMapping("/estado")
 @CrossOrigin(origins = { "*" })
 public class EstadoController {
-	
+
 	@Autowired
 	private EstadoServise estadoServise;
 
@@ -23,7 +23,7 @@ public class EstadoController {
 
 	public ResponseEntity<Boolean> crearestado(Estado estado) {
 		return new ResponseEntity<>(estadoServise.crearestado(estado), HttpStatus.ACCEPTED);
-		
+
 	}
 
 }
