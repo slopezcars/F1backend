@@ -1,7 +1,6 @@
 package co.edu.unbosque.formula1.model;
 
 public class TipoPenalizacion {
-
 	private int idTipoPenalizacion;
 	private String nombre;
 	private String descripcion;

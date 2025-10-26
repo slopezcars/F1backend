@@ -1,19 +1,18 @@
 package co.edu.unbosque.formula1.model;
 
 public class Penalizacion {
-	
-	private int idPenalizacion;
-    private String momento;
-    private double tiempo;
-    
-    
-    public Penalizacion() {
-    }
 
-    public Penalizacion( String momento, double tiempo) {
-        this.momento = momento;
-        this.tiempo = tiempo;
-    }
+	private int idPenalizacion;
+	private String momento;
+	private double tiempo;
+
+	public Penalizacion() {
+	}
+
+	public Penalizacion(String momento, double tiempo) {
+		this.momento = momento;
+		this.tiempo = tiempo;
+	}
 
 	public int getIdPenalizacion() {
 		return idPenalizacion;
@@ -38,7 +37,5 @@ public class Penalizacion {
 	public void setTiempo(double tiempo) {
 		this.tiempo = tiempo;
 	}
-
-    
 
 }
