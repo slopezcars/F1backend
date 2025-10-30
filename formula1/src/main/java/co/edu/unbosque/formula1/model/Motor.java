@@ -7,7 +7,7 @@ public class Motor {
 
 	public Motor() {
 	}
-
+	
 	public Motor(int idmotor, String tipoMotor) {
 		this.idmotor = idmotor;
 		this.tipoMotor = tipoMotor;
