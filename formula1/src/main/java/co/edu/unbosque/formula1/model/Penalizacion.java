@@ -1,15 +1,18 @@
 package co.edu.unbosque.formula1.model;
 
+import java.time.LocalDateTime;
+
 public class Penalizacion {
 
 	private int idPenalizacion;
-	private String momento;
-	private double tiempo;
+	private LocalDateTime momento;
+	private int tiempo;
 
 	public Penalizacion() {
 	}
 
-	public Penalizacion(String momento, double tiempo) {
+	public Penalizacion(int idPenalizacion, LocalDateTime momento, int tiempo) {
+		this.idPenalizacion = idPenalizacion;
 		this.momento = momento;
 		this.tiempo = tiempo;
 	}
@@ -22,19 +25,19 @@ public class Penalizacion {
 		this.idPenalizacion = idPenalizacion;
 	}
 
-	public String getMomento() {
+	public LocalDateTime getMomento() {
 		return momento;
 	}
 
-	public void setMomento(String momento) {
+	public void setMomento(LocalDateTime momento) {
 		this.momento = momento;
 	}
 
-	public double getTiempo() {
+	public int getTiempo() {
 		return tiempo;
 	}
 
-	public void setTiempo(double tiempo) {
+	public void setTiempo(int tiempo) {
 		this.tiempo = tiempo;
 	}
 

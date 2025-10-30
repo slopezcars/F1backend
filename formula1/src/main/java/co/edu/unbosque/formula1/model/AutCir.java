@@ -1,45 +1,44 @@
 package co.edu.unbosque.formula1.model;
 
+import java.math.BigDecimal;
+
 public class AutCir {
 
-    private int idSector;
-    private String placa;
-    private double velocidad;
+	private int idCircuito;
+	private String placa;
+	private BigDecimal velocidad;
 
-    public AutCir() {
-    }
+	public AutCir() {
+	}
 
-    public AutCir(int idSector, String placa, double velocidad) {
-        this.idSector = idSector;
-        this.placa = placa;
-        this.velocidad = velocidad;
-    }
+	public AutCir(int idCircuito, String placa, BigDecimal velocidad) {
+		this.idCircuito = idCircuito;
+		this.placa = placa;
+		this.velocidad = velocidad;
+	}
 
-    public int getIdSector() {
-        return idSector;
-    }
+	public int getIdCircuito() {
+		return idCircuito;
+	}
 
-    public void setIdSector(int idSector) {
-        this.idSector = idSector;
-    }
+	public void setIdCircuito(int idCircuito) {
+		this.idCircuito = idCircuito;
+	}
 
-    public String getPlaca() {
-        return placa;
-    }
+	public String getPlaca() {
+		return placa;
+	}
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
 
-    public double getVelocidad() {
-        return velocidad;
-    }
+	public BigDecimal getVelocidad() {
+		return velocidad;
+	}
 
-    public void setVelocidad(double velocidad) {
-        this.velocidad = velocidad;
-    }
+	public void setVelocidad(BigDecimal velocidad) {
+		this.velocidad = velocidad;
+	}
 
-    
 }
-
-

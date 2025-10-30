@@ -8,7 +8,8 @@ public class Modelo {
 	public Modelo() {
 	}
 
-	public Modelo(String nombre) {
+	public Modelo(int idModelo, String nombre) {
+		this.idModelo = idModelo;
 		this.nombre = nombre;
 	}
 

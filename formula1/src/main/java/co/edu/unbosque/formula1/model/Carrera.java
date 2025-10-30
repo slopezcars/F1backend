@@ -4,33 +4,34 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Carrera {
-	private int id;
+	private int idCarrera;
 	private LocalTime horaInicio;
 	private LocalTime horaFin;
-	private String nombre;
-	private LocalDate fecha;
 	private int idJefeEquipo;
 	private int idCircuito;
+	private String nombre;
+	private LocalDate fecha;
 
 	public Carrera() {
 	}
 
-	public Carrera(LocalTime horaInicio, LocalTime horaFin, String nombre, LocalDate fecha, int idJefeEquipo,
-			int idCircuito) {
+	public Carrera(int idCarrera, LocalTime horaInicio, LocalTime horaFin, int idJefeEquipo, int idCircuito,
+			String nombre, LocalDate fecha) {
+		this.idCarrera = idCarrera;
 		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
-		this.nombre = nombre;
-		this.fecha = fecha;
 		this.idJefeEquipo = idJefeEquipo;
 		this.idCircuito = idCircuito;
+		this.nombre = nombre;
+		this.fecha = fecha;
 	}
 
-	public int getId() {
-		return id;
+	public int getIdCarrera() {
+		return idCarrera;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdCarrera(int idCarrera) {
+		this.idCarrera = idCarrera;
 	}
 
 	public LocalTime getHoraInicio() {
@@ -49,22 +50,6 @@ public class Carrera {
 		this.horaFin = horaFin;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public LocalDate getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
-
 	public int getIdJefeEquipo() {
 		return idJefeEquipo;
 	}
@@ -79,6 +64,22 @@ public class Carrera {
 
 	public void setIdCircuito(int idCircuito) {
 		this.idCircuito = idCircuito;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
 	}
 
 }

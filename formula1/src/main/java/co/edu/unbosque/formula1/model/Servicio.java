@@ -1,3 +1,4 @@
+
 package co.edu.unbosque.formula1.model;
 
 public class Servicio {
@@ -6,10 +7,10 @@ public class Servicio {
 	private String descripcion;
 
 	public Servicio() {
-
 	}
 
-	public Servicio(String descripcion) {
+	public Servicio(int idServicio, String descripcion) {
+		this.idServicio = idServicio;
 		this.descripcion = descripcion;
 	}
 
@@ -28,5 +29,4 @@ public class Servicio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 }

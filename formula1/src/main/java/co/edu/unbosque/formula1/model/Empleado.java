@@ -15,9 +15,10 @@ public class Empleado {
 	public Empleado() {
 	}
 
-	public Empleado(LocalDate fechaNacimiento, String primerNombre, String primerApellido, int idNacionalidad,
+	public Empleado(int id, LocalDate fechaNacimiento, String primerNombre, String primerApellido, int idNacionalidad,
 			int idEstado) {
 
+		this.id = id;
 		this.fechaNacimiento = fechaNacimiento;
 		this.primerNombre = primerNombre;
 		this.primerApellido = primerApellido;

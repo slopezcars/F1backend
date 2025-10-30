@@ -3,21 +3,45 @@ package co.edu.unbosque.formula1.model;
 import java.time.LocalDate;
 
 public class Auto {
+	private String placa;
+	private String numeroChasis;
+	private int idmotor;
 	private LocalDate fechaEstreno;
 	private int idmodelo;
-	private int idmotor;
-	private int numeroChasis;
-	private String placa; // ¿? ---> que se hace
 
 	public Auto() {
 	}
 
-	public Auto(LocalDate fechaEstreno, int idmodelo, int idmotor, int numeroChasis, String placa) {
+	public Auto(String placa, String numeroChasis, int idmotor, LocalDate fechaEstreno, int idmodelo) {
+		this.placa = placa;
+		this.numeroChasis = numeroChasis;
+		this.idmotor = idmotor;
 		this.fechaEstreno = fechaEstreno;
 		this.idmodelo = idmodelo;
-		this.idmotor = idmotor;
-		this.numeroChasis = numeroChasis;
+	}
+
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
 		this.placa = placa;
+	}
+
+	public String getNumeroChasis() {
+		return numeroChasis;
+	}
+
+	public void setNumeroChasis(String numeroChasis) {
+		this.numeroChasis = numeroChasis;
+	}
+
+	public int getIdmotor() {
+		return idmotor;
+	}
+
+	public void setIdmotor(int idmotor) {
+		this.idmotor = idmotor;
 	}
 
 	public LocalDate getFechaEstreno() {
@@ -34,30 +58,6 @@ public class Auto {
 
 	public void setIdmodelo(int idmodelo) {
 		this.idmodelo = idmodelo;
-	}
-
-	public int getIdmotor() {
-		return idmotor;
-	}
-
-	public void setIdmotor(int idmotor) {
-		this.idmotor = idmotor;
-	}
-
-	public int getNumeroChasis() {
-		return numeroChasis;
-	}
-
-	public void setNumeroChasis(int numeroChasis) {
-		this.numeroChasis = numeroChasis;
-	}
-
-	public String getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
 	}
 
 }
