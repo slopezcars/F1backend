@@ -25,9 +25,9 @@ public class AutCirRepository {
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, autCir.getIdSector());
+            statement.setInt(1, autCir.getIdCircuito());
             statement.setString(2, autCir.getPlaca());
-            statement.setDouble(3, autCir.getVelocidad());
+            statement.setBigDecimal(3, autCir.getVelocidad());
 
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas > 0;
@@ -49,9 +49,9 @@ public class AutCirRepository {
 
             while (rs.next()) {
                 AutCir autCir = new AutCir();
-                autCir.setIdSector(rs.getInt("id_sector"));
+                autCir.setIdCircuito(rs.getInt("id_sector"));
                 autCir.setPlaca(rs.getString("placa"));
-                autCir.setVelocidad(rs.getDouble("velocidad"));
+                autCir.setVelocidad(rs.getBigDecimal("velocidad"));
                 lista.add(autCir);
             }
 
@@ -75,9 +75,9 @@ public class AutCirRepository {
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     autCir = new AutCir();
-                    autCir.setIdSector(rs.getInt("id_sector"));
+                    autCir.setIdCircuito(rs.getInt("id_sector"));
                     autCir.setPlaca(rs.getString("placa"));
-                    autCir.setVelocidad(rs.getDouble("velocidad"));
+                    autCir.setVelocidad(rs.getBigDecimal("velocidad"));
                 }
             }
 
@@ -96,8 +96,8 @@ public class AutCirRepository {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, autCir.getPlaca());
-            statement.setDouble(2, autCir.getVelocidad());
-            statement.setInt(3, autCir.getIdSector());
+            statement.setBigDecimal(2, autCir.getVelocidad());
+            statement.setInt(3, autCir.getIdCircuito());
 
             return statement.executeUpdate() > 0;
 

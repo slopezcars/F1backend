@@ -21,7 +21,7 @@ public class AutoRepository {
 
     // Crear un nuevo auto
     public boolean crearAuto(Auto auto) {
-        String sql = "INSERT INTO auto (fecha_estreno, id_modelo, id_motor, numero_chasis, placa) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO auto (fecha_estreno, id_modelo, id_motor, numero_chasis) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -29,7 +29,7 @@ public class AutoRepository {
             statement.setDate(1, Date.valueOf(auto.getFechaEstreno()));
             statement.setInt(2, auto.getIdmodelo());
             statement.setInt(3, auto.getIdmotor());
-            statement.setInt(4, auto.getNumeroChasis());
+            statement.setString(4, auto.getNumeroChasis());
             statement.setString(5, auto.getPlaca());
 
             int filasAfectadas = statement.executeUpdate();
@@ -55,7 +55,7 @@ public class AutoRepository {
                 auto.setFechaEstreno(rs.getDate("fecha_estreno").toLocalDate());
                 auto.setIdmodelo(rs.getInt("id_modelo"));
                 auto.setIdmotor(rs.getInt("id_motor"));
-                auto.setNumeroChasis(rs.getInt("numero_chasis"));
+                auto.setNumeroChasis(rs.getString("numero_chasis"));
                 auto.setPlaca(rs.getString("placa"));
                 autos.add(auto);
             }
@@ -83,7 +83,7 @@ public class AutoRepository {
                     auto.setFechaEstreno(rs.getDate("fecha_estreno").toLocalDate());
                     auto.setIdmodelo(rs.getInt("id_modelo"));
                     auto.setIdmotor(rs.getInt("id_motor"));
-                    auto.setNumeroChasis(rs.getInt("numero_chasis"));
+                    auto.setNumeroChasis(rs.getString("numero_chasis"));
                     auto.setPlaca(rs.getString("placa"));
                 }
             }
@@ -105,7 +105,7 @@ public class AutoRepository {
             statement.setDate(1, Date.valueOf(auto.getFechaEstreno()));
             statement.setInt(2, auto.getIdmodelo());
             statement.setInt(3, auto.getIdmotor());
-            statement.setInt(4, auto.getNumeroChasis());
+            statement.setString(4, auto.getNumeroChasis());
             statement.setString(5, auto.getPlaca());
 
             return statement.executeUpdate() > 0;

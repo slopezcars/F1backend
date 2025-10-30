@@ -17,7 +17,7 @@ public class CarreraRepository {
 
     // Crear una nueva carrera
     public boolean crearCarrera(Carrera carrera) {
-        String sql = "INSERT INTO carrera (idCarrera,hora_inicio, hora_fin,id_jefe_equipo, id_circuito, nombre,fecha) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO carrera (hora_inicio, hora_fin,id_jefe_equipo, id_circuito, nombre,fecha) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -49,7 +49,7 @@ public class CarreraRepository {
 
             while (rs.next()) {
                 Carrera carrera = new Carrera();
-                carrera.setId(rs.getInt("id"));
+                carrera.setIdCarrera(rs.getInt("id_Carrera"));
                 carrera.setHoraInicio(rs.getTime("hora_inicio").toLocalTime());
                 carrera.setHoraFin(rs.getTime("hora_fin").toLocalTime());
                 carrera.setNombre(rs.getString("nombre"));
@@ -67,19 +67,19 @@ public class CarreraRepository {
     }
 
     // Buscar una carrera por su ID
-    public Carrera buscarPorId(int id) {
+    public Carrera buscarPorId(int idCarrera) {
         String sql = "SELECT * FROM carrera WHERE id = ?";
         Carrera carrera = null;
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, id);
+            statement.setInt(1, idCarrera);
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     carrera = new Carrera();
-                    carrera.setId(rs.getInt("id"));
+                    carrera.setIdCarrera(rs.getInt("id_Carrera"));
                     carrera.setHoraInicio(rs.getTime("hora_inicio").toLocalTime());
                     carrera.setHoraFin(rs.getTime("hora_fin").toLocalTime());
                     carrera.setNombre(rs.getString("nombre"));
@@ -109,7 +109,7 @@ public class CarreraRepository {
             statement.setDate(4, Date.valueOf(carrera.getFecha()));
             statement.setInt(5, carrera.getIdJefeEquipo());
             statement.setInt(6, carrera.getIdCircuito());
-            statement.setInt(7, carrera.getId());
+            statement.setInt(7, carrera.getIdCarrera());
 
             return statement.executeUpdate() > 0;
 

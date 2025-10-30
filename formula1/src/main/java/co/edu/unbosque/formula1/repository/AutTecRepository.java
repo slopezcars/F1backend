@@ -23,9 +23,10 @@ public class AutTecRepository {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, autTec.getPlaca());
-            statement.setInt(2, autTec.getIdTecnico());
-            statement.setTimestamp(3, Timestamp.valueOf(autTec.getHoraEntrada()));
+            statement.setInt(2, autTec.getIdTecnico());            
+            statement.setLocalTime(3, Timestamp.valueOf(autTec.getHoraEntrada()));
             statement.setTimestamp(4, Timestamp.valueOf(autTec.getHoraSalida()));
+            
             statement.setInt(5, autTec.getIdServicio());
 
             return statement.executeUpdate() > 0;

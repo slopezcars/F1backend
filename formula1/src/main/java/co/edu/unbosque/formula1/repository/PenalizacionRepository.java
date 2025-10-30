@@ -25,7 +25,7 @@ public class PenalizacionRepository {
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.set(1, penalizacion.getMomento());
+            statement.setLocalDateTime(1, penalizacion.getMomento());
             statement.setDouble(2, penalizacion.getTiempo());
             return statement.executeUpdate() > 0;
 
