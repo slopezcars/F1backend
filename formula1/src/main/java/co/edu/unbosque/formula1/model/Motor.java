@@ -3,13 +3,13 @@ package co.edu.unbosque.formula1.model;
 public class Motor {
 
 	private int idmotor;
-	private int tipoMotor;
+	private String tipoMotor;
 
 	public Motor() {
 	}
 
 	
-	public Motor(int idmotor, int tipoMotor) {
+	public Motor(int idmotor, String tipoMotor) {
 		super();
 		this.idmotor = idmotor;
 		this.tipoMotor = tipoMotor;
@@ -24,11 +24,11 @@ public class Motor {
 		this.idmotor = idmotor;
 	}
 
-	public int getTipoMotor() {
+	public String getTipoMotor() {
 		return tipoMotor;
 	}
 
-	public void setTipoMotor(int tipoMotor) {
+	public void setTipoMotor(String tipoMotor) {
 		this.tipoMotor = tipoMotor;
 	}
 

@@ -25,7 +25,7 @@ public class MotorRepository {
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, motor.getTipoMotor());
+            statement.setString(1, motor.getTipoMotor());
             int filas = statement.executeUpdate();
             return filas > 0;
 
@@ -47,7 +47,7 @@ public class MotorRepository {
             while (rs.next()) {
                 Motor motor = new Motor();
                 motor.setIdmotor(rs.getInt("id_motor"));
-                motor.setTipoMotor(rs.getInt("tipo_motor"));
+                motor.setTipoMotor(rs.getString("tipo_motor"));
                 motores.add(motor);
             }
 
@@ -71,7 +71,7 @@ public class MotorRepository {
                 if (rs.next()) {
                     motor = new Motor();
                     motor.setIdmotor(rs.getInt("id_motor"));
-                    motor.setTipoMotor(rs.getInt("tipo_motor"));
+                    motor.setTipoMotor(rs.getString("tipo_motor"));
                 }
             }
 
@@ -89,7 +89,7 @@ public class MotorRepository {
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, motor.getTipoMotor());
+            statement.setString(1, motor.getTipoMotor());
             statement.setInt(2, motor.getIdmotor());
             return statement.executeUpdate() > 0;
 
