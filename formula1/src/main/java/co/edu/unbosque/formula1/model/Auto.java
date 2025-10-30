@@ -7,7 +7,7 @@ public class Auto {
 	private int idmodelo;
 	private int idmotor;
 	private int numeroChasis;
-	private String placa; // ¿? ---> que se hace
+	private String placa; 
 
 	public Auto() {
 	}

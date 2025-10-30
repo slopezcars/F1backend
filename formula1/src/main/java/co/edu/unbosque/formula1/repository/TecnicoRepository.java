@@ -10,22 +10,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import co.edu.unbosque.formula1.model.Nacionalidad;
+import co.edu.unbosque.formula1.model.Tecnico;
 
 @Repository
-public class NacionalidadRepository {
+public class TecnicoRepository {
 
     @Autowired
     private ConexionDB conexionDB;
 
-    // Crear una nueva nacionalidad
-    public boolean crearNacionalidad(Nacionalidad nacionalidad) {
-        String sql = "INSERT INTO nacionalidad (nombre) VALUES (?)";
+    // Crear un nuevo técnico
+    public boolean crearTecnico(Tecnico tecnico) {
+        String sql = "INSERT INTO tecnico (id_especialidad) VALUES (?)";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, nacionalidad.getNombre());
+            statement.setInt(1, tecnico.getIdEspecialidad());
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas > 0;
 
@@ -35,44 +35,44 @@ public class NacionalidadRepository {
         }
     }
 
-    // Obtener todas las nacionalidades
-    public List<Nacionalidad> obtenerTodas() {
-        List<Nacionalidad> nacionalidades = new ArrayList<>();
-        String sql = "SELECT * FROM nacionalidad";
+    // Obtener todos los técnicos
+    public List<Tecnico> obtenerTodos() {
+        List<Tecnico> tecnicos = new ArrayList<>();
+        String sql = "SELECT * FROM tecnico";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                Nacionalidad nac = new Nacionalidad();
-                nac.setIdNacionalidad(rs.getInt("id_nacionalidad"));
-                nac.setNombre(rs.getString("nombre"));
-                nacionalidades.add(nac);
+                Tecnico tec = new Tecnico();
+                tec.setId(rs.getInt("id"));
+                tec.setIdEspecialidad(rs.getInt("id_especialidad"));
+                tecnicos.add(tec);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return nacionalidades;
+        return tecnicos;
     }
 
-    // Buscar una nacionalidad por su ID
-    public Nacionalidad buscarPorId(int idNacionalidad) {
-        String sql = "SELECT * FROM nacionalidad WHERE id_nacionalidad = ?";
-        Nacionalidad nacionalidad = null;
+    // Buscar técnico por ID
+    public Tecnico buscarPorId(int id) {
+        String sql = "SELECT * FROM tecnico WHERE id = ?";
+        Tecnico tecnico = null;
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, idNacionalidad);
+            statement.setInt(1, id);
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    nacionalidad = new Nacionalidad();
-                    nacionalidad.setIdNacionalidad(rs.getInt("id_nacionalidad"));
-                    nacionalidad.setNombre(rs.getString("nombre"));
+                    tecnico = new Tecnico();
+                    tecnico.setId(rs.getInt("id"));
+                    tecnico.setIdEspecialidad(rs.getInt("id_especialidad"));
                 }
             }
 
@@ -80,18 +80,18 @@ public class NacionalidadRepository {
             e.printStackTrace();
         }
 
-        return nacionalidad;
+        return tecnico;
     }
 
-    // Editar una nacionalidad existente
-    public boolean editarNacionalidad(Nacionalidad nacionalidad) {
-        String sql = "UPDATE nacionalidad SET nombre = ? WHERE id_nacionalidad = ?";
+    // Editar un técnico existente
+    public boolean editarTecnico(Tecnico tecnico) {
+        String sql = "UPDATE tecnico SET id_especialidad = ? WHERE id = ?";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, nacionalidad.getNombre());
-            statement.setInt(2, nacionalidad.getIdNacionalidad());
+            statement.setInt(1, tecnico.getIdEspecialidad());
+            statement.setInt(2, tecnico.getId());
 
             return statement.executeUpdate() > 0;
 
@@ -101,14 +101,14 @@ public class NacionalidadRepository {
         }
     }
 
-    // Eliminar una nacionalidad por ID
-    public boolean eliminarNacionalidad(int idNacionalidad) {
-        String sql = "DELETE FROM nacionalidad WHERE id_nacionalidad = ?";
+    // Eliminar técnico por ID
+    public boolean eliminarTecnico(int id) {
+        String sql = "DELETE FROM tecnico WHERE id = ?";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, idNacionalidad);
+            statement.setInt(1, id);
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {

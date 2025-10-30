@@ -15,54 +15,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unbosque.formula1.model.Empleado;
-import co.edu.unbosque.formula1.service.EmpleadoService;
+import co.edu.unbosque.formula1.model.Servicio;
+import co.edu.unbosque.formula1.service.ServicioService;
 
 @RestController
-@RequestMapping("/empleado")
+@RequestMapping("/servicio")
 @CrossOrigin(origins = { "" })
-public class EmpleadoController {
+public class ServicioController {
 
     @Autowired
-    private EmpleadoService empleadoService;
+    private ServicioService servicioService;
 
-    // Crear empleado
+    // Crear servicio
     @PostMapping("/crear")
-    public ResponseEntity<Boolean> crearEmpleado(@RequestBody Empleado empleado) {
-        boolean creado = empleadoService.crearEmpleado(empleado);
+    public ResponseEntity<Boolean> crearServicio(@RequestBody Servicio servicio) {
+        boolean creado = servicioService.crearServicio(servicio);
         return new ResponseEntity<>(creado, creado ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
     }
 
-    // Listar empleados
+    // Listar todos los servicios
     @GetMapping("/listar")
-    public ResponseEntity<List<Empleado>> listarEmpleados() {
-        List<Empleado> empleados = empleadoService.obtenerTodos();
-        return new ResponseEntity<>(empleados, HttpStatus.OK);
+    public ResponseEntity<List<Servicio>> obtenerTodos() {
+        List<Servicio> servicios = servicioService.obtenerTodos();
+        return new ResponseEntity<>(servicios, HttpStatus.OK);
     }
 
-    // Buscar empleado por ID
+    // Buscar servicio por ID
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<Empleado> buscarPorId(@PathVariable int id) {
-        Empleado empleado = empleadoService.buscarPorId(id);
-        if (empleado != null) {
-            return new ResponseEntity<>(empleado, HttpStatus.OK);
+    public ResponseEntity<Servicio> buscarPorId(@PathVariable int id) {
+        Servicio servicio = servicioService.buscarPorId(id);
+        if (servicio != null) {
+            return new ResponseEntity<>(servicio, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Editar empleado
+    // Editar servicio
     @PutMapping("/editar/{id}")
-    public ResponseEntity<Boolean> editarEmpleado(@PathVariable int id, @RequestBody Empleado empleado) {
-        empleado.setId(id);
-        boolean editado = empleadoService.editarEmpleado(empleado);
+    public ResponseEntity<Boolean> editarServicio(@PathVariable int id, @RequestBody Servicio servicio) {
+        servicio.setIdServicio(id);
+        boolean editado = servicioService.editarServicio(servicio);
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar empleado
+    // Eliminar servicio
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarEmpleado(@PathVariable int id) {
-        boolean eliminado = empleadoService.eliminarEmpleado(id);
+    public ResponseEntity<Boolean> eliminarServicio(@PathVariable int id) {
+        boolean eliminado = servicioService.eliminarServicio(id);
         return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }

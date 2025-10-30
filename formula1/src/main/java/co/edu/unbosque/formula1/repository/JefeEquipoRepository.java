@@ -1,6 +1,7 @@
 package co.edu.unbosque.formula1.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,22 +11,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import co.edu.unbosque.formula1.model.Nacionalidad;
+import co.edu.unbosque.formula1.model.JefeEquipo;
 
 @Repository
-public class NacionalidadRepository {
+public class JefeEquipoRepository {
 
     @Autowired
     private ConexionDB conexionDB;
 
-    // Crear una nueva nacionalidad
-    public boolean crearNacionalidad(Nacionalidad nacionalidad) {
-        String sql = "INSERT INTO nacionalidad (nombre) VALUES (?)";
+    // Crear un nuevo jefe de equipo
+    public boolean crearJefeEquipo(JefeEquipo jefeEquipo) {
+        String sql = "INSERT INTO jefe_equipo (fecha_inicio) VALUES (?)";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, nacionalidad.getNombre());
+            statement.setDate(1, Date.valueOf(jefeEquipo.getFechaInicio()));
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas > 0;
 
@@ -35,44 +36,44 @@ public class NacionalidadRepository {
         }
     }
 
-    // Obtener todas las nacionalidades
-    public List<Nacionalidad> obtenerTodas() {
-        List<Nacionalidad> nacionalidades = new ArrayList<>();
-        String sql = "SELECT * FROM nacionalidad";
+    // Obtener todos los jefes de equipo
+    public List<JefeEquipo> obtenerTodos() {
+        List<JefeEquipo> jefes = new ArrayList<>();
+        String sql = "SELECT * FROM jefe_equipo";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                Nacionalidad nac = new Nacionalidad();
-                nac.setIdNacionalidad(rs.getInt("id_nacionalidad"));
-                nac.setNombre(rs.getString("nombre"));
-                nacionalidades.add(nac);
+                JefeEquipo jefe = new JefeEquipo();
+                jefe.setId(rs.getInt("id"));
+                jefe.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+                jefes.add(jefe);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return nacionalidades;
+        return jefes;
     }
 
-    // Buscar una nacionalidad por su ID
-    public Nacionalidad buscarPorId(int idNacionalidad) {
-        String sql = "SELECT * FROM nacionalidad WHERE id_nacionalidad = ?";
-        Nacionalidad nacionalidad = null;
+    // Buscar jefe de equipo por ID
+    public JefeEquipo buscarPorId(int id) {
+        String sql = "SELECT * FROM jefe_equipo WHERE id = ?";
+        JefeEquipo jefe = null;
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, idNacionalidad);
+            statement.setInt(1, id);
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    nacionalidad = new Nacionalidad();
-                    nacionalidad.setIdNacionalidad(rs.getInt("id_nacionalidad"));
-                    nacionalidad.setNombre(rs.getString("nombre"));
+                    jefe = new JefeEquipo();
+                    jefe.setId(rs.getInt("id"));
+                    jefe.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
                 }
             }
 
@@ -80,18 +81,18 @@ public class NacionalidadRepository {
             e.printStackTrace();
         }
 
-        return nacionalidad;
+        return jefe;
     }
 
-    // Editar una nacionalidad existente
-    public boolean editarNacionalidad(Nacionalidad nacionalidad) {
-        String sql = "UPDATE nacionalidad SET nombre = ? WHERE id_nacionalidad = ?";
+    // Editar jefe de equipo
+    public boolean editarJefeEquipo(JefeEquipo jefeEquipo) {
+        String sql = "UPDATE jefe_equipo SET fecha_inicio = ? WHERE id = ?";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, nacionalidad.getNombre());
-            statement.setInt(2, nacionalidad.getIdNacionalidad());
+            statement.setDate(1, Date.valueOf(jefeEquipo.getFechaInicio()));
+            statement.setInt(2, jefeEquipo.getId());
 
             return statement.executeUpdate() > 0;
 
@@ -101,14 +102,14 @@ public class NacionalidadRepository {
         }
     }
 
-    // Eliminar una nacionalidad por ID
-    public boolean eliminarNacionalidad(int idNacionalidad) {
-        String sql = "DELETE FROM nacionalidad WHERE id_nacionalidad = ?";
+    // Eliminar jefe de equipo
+    public boolean eliminarJefeEquipo(int id) {
+        String sql = "DELETE FROM jefe_equipo WHERE id = ?";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, idNacionalidad);
+            statement.setInt(1, id);
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {

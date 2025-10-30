@@ -15,54 +15,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unbosque.formula1.model.Empleado;
-import co.edu.unbosque.formula1.service.EmpleadoService;
+import co.edu.unbosque.formula1.model.JefeEquipo;
+import co.edu.unbosque.formula1.service.JefeEquipoService;
 
 @RestController
-@RequestMapping("/empleado")
+@RequestMapping("/jefeequipo")
 @CrossOrigin(origins = { "" })
-public class EmpleadoController {
+public class JefeEquipoController {
 
     @Autowired
-    private EmpleadoService empleadoService;
+    private JefeEquipoService jefeEquipoService;
 
-    // Crear empleado
+    // Crear
     @PostMapping("/crear")
-    public ResponseEntity<Boolean> crearEmpleado(@RequestBody Empleado empleado) {
-        boolean creado = empleadoService.crearEmpleado(empleado);
+    public ResponseEntity<Boolean> crearJefeEquipo(@RequestBody JefeEquipo jefeEquipo) {
+        boolean creado = jefeEquipoService.crearJefeEquipo(jefeEquipo);
         return new ResponseEntity<>(creado, creado ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
     }
 
-    // Listar empleados
+    // Listar
     @GetMapping("/listar")
-    public ResponseEntity<List<Empleado>> listarEmpleados() {
-        List<Empleado> empleados = empleadoService.obtenerTodos();
-        return new ResponseEntity<>(empleados, HttpStatus.OK);
+    public ResponseEntity<List<JefeEquipo>> listarJefes() {
+        List<JefeEquipo> jefes = jefeEquipoService.obtenerTodos();
+        return new ResponseEntity<>(jefes, HttpStatus.OK);
     }
 
-    // Buscar empleado por ID
+    // Buscar por ID
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<Empleado> buscarPorId(@PathVariable int id) {
-        Empleado empleado = empleadoService.buscarPorId(id);
-        if (empleado != null) {
-            return new ResponseEntity<>(empleado, HttpStatus.OK);
+    public ResponseEntity<JefeEquipo> buscarPorId(@PathVariable int id) {
+        JefeEquipo jefe = jefeEquipoService.buscarPorId(id);
+        if (jefe != null) {
+            return new ResponseEntity<>(jefe, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Editar empleado
+    // Editar
     @PutMapping("/editar/{id}")
-    public ResponseEntity<Boolean> editarEmpleado(@PathVariable int id, @RequestBody Empleado empleado) {
-        empleado.setId(id);
-        boolean editado = empleadoService.editarEmpleado(empleado);
+    public ResponseEntity<Boolean> editarJefeEquipo(@PathVariable int id, @RequestBody JefeEquipo jefeEquipo) {
+        jefeEquipo.setId(id);
+        boolean editado = jefeEquipoService.editarJefeEquipo(jefeEquipo);
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar empleado
+    // Eliminar
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarEmpleado(@PathVariable int id) {
-        boolean eliminado = empleadoService.eliminarEmpleado(id);
+    public ResponseEntity<Boolean> eliminarJefeEquipo(@PathVariable int id) {
+        boolean eliminado = jefeEquipoService.eliminarJefeEquipo(id);
         return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }
