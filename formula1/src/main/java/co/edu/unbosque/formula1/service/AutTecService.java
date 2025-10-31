@@ -2,7 +2,6 @@ package co.edu.unbosque.formula1.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.unbosque.formula1.model.AutTec;
@@ -11,26 +10,66 @@ import co.edu.unbosque.formula1.repository.AutTecRepository;
 @Service
 public class AutTecService {
 
-    @Autowired
-    private AutTecRepository autTecRepository;
+    private final AutTecRepository autTecRepository;
 
+    public AutTecService(AutTecRepository autTecRepository) {
+        this.autTecRepository = autTecRepository;
+    }
+
+    // CREAR
     public boolean crearAutTec(AutTec autTec) {
-        return autTecRepository.crearAutTec(autTec);
+        try {
+            autTecRepository.insertar(autTec);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
+    // LISTAR TODO
     public List<AutTec> obtenerTodos() {
-        return autTecRepository.obtenerTodos();
+        try {
+            return autTecRepository.obtenerTodos();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public AutTec buscarPorPlacaYTecnico(String placa, int idTecnico) {
-        return autTecRepository.buscarPorPlacaYTecnico(placa, idTecnico);
+    // BUSCAR POR PLACA
+    public AutTec buscarPorPlaca(String placa) {
+        try {
+            return autTecRepository.obtenerTodos()
+                    .stream()
+                    .filter(a -> a.getPlaca().equals(placa))
+                    .findFirst()
+                    .orElse(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    // EDITAR
     public boolean editarAutTec(AutTec autTec) {
-        return autTecRepository.editarAutTec(autTec);
+        try {
+            autTecRepository.actualizar(autTec);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public boolean eliminarAutTec(String placa, int idTecnico) {
-        return autTecRepository.eliminarAutTec(placa, idTecnico);
+    // ELIMINAR
+    public boolean eliminarAutTec(String placa) {
+        try {
+            autTecRepository.eliminar(placa);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

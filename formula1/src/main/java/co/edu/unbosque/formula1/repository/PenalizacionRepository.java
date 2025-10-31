@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class PenalizacionRepository {
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setLocalDateTime(1, penalizacion.getMomento());
-            statement.setDouble(2, penalizacion.getTiempo());
+            statement.setTimestamp(1, Timestamp.valueOf(penalizacion.getMomento()));
+            statement.setInt(2, penalizacion.getTiempo());
+
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -47,8 +49,14 @@ public class PenalizacionRepository {
             while (rs.next()) {
                 Penalizacion p = new Penalizacion();
                 p.setIdPenalizacion(rs.getInt("id_penalizacion"));
-                p.setMomento(rs.getString("momento"));
-                p.setTiempo(rs.getDouble("tiempo"));
+
+                Timestamp ts = rs.getTimestamp("momento");
+                if (ts != null) {
+                    p.setMomento(ts.toLocalDateTime());
+                }
+
+                p.setTiempo(rs.getInt("tiempo"));
+
                 penalizaciones.add(p);
             }
 
@@ -73,8 +81,13 @@ public class PenalizacionRepository {
                 if (rs.next()) {
                     penalizacion = new Penalizacion();
                     penalizacion.setIdPenalizacion(rs.getInt("id_penalizacion"));
-                    penalizacion.setMomento(rs.getString("momento"));
-                    penalizacion.setTiempo(rs.getDouble("tiempo"));
+
+                    Timestamp ts = rs.getTimestamp("momento");
+                    if (ts != null) {
+                        penalizacion.setMomento(ts.toLocalDateTime());
+                    }
+
+                    penalizacion.setTiempo(rs.getInt("tiempo"));
                 }
             }
 
@@ -92,9 +105,10 @@ public class PenalizacionRepository {
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, penalizacion.getMomento());
-            statement.setDouble(2, penalizacion.getTiempo());
+            statement.setTimestamp(1, Timestamp.valueOf(penalizacion.getMomento()));
+            statement.setInt(2, penalizacion.getTiempo());
             statement.setInt(3, penalizacion.getIdPenalizacion());
+
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -111,6 +125,7 @@ public class PenalizacionRepository {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, idPenalizacion);
+
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {

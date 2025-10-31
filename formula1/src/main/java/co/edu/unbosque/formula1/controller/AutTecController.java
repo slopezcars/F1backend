@@ -12,7 +12,7 @@ import co.edu.unbosque.formula1.service.AutTecService;
 
 @RestController
 @RequestMapping("/aut-tec")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = "*") // permitir todos los orígenes
 public class AutTecController {
 
     @Autowired
@@ -32,10 +32,10 @@ public class AutTecController {
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
-    // Buscar por placa y técnico
-    @GetMapping("/buscar/{placa}/{idTecnico}")
-    public ResponseEntity<AutTec> buscarPorPlacaYTecnico(@PathVariable String placa, @PathVariable int idTecnico) {
-        AutTec autTec = autTecService.buscarPorPlacaYTecnico(placa, idTecnico);
+    // Buscar por placa
+    @GetMapping("/buscar/{placa}")
+    public ResponseEntity<AutTec> buscarPorPlaca(@PathVariable String placa) {
+        AutTec autTec = autTecService.buscarPorPlaca(placa);
         if (autTec != null) {
             return new ResponseEntity<>(autTec, HttpStatus.OK);
         } else {
@@ -43,19 +43,18 @@ public class AutTecController {
         }
     }
 
-    // Editar por placa e idTecnico
-    @PutMapping("/editar/{placa}/{idTecnico}")
-    public ResponseEntity<Boolean> editarAutTec(@PathVariable String placa, @PathVariable int idTecnico, @RequestBody AutTec autTec) {
+    // Editar por placa
+    @PutMapping("/editar/{placa}")
+    public ResponseEntity<Boolean> editarAutTec(@PathVariable String placa, @RequestBody AutTec autTec) {
         autTec.setPlaca(placa);
-        autTec.setIdTecnico(idTecnico);
         boolean editado = autTecService.editarAutTec(autTec);
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar por placa e idTecnico
-    @DeleteMapping("/eliminar/{placa}/{idTecnico}")
-    public ResponseEntity<Boolean> eliminarAutTec(@PathVariable String placa, @PathVariable int idTecnico) {
-        boolean eliminado = autTecService.eliminarAutTec(placa, idTecnico);
+    // Eliminar por placa
+    @DeleteMapping("/eliminar/{placa}")
+    public ResponseEntity<Boolean> eliminarAutTec(@PathVariable String placa) {
+        boolean eliminado = autTecService.eliminarAutTec(placa);
         return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }
