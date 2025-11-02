@@ -19,8 +19,8 @@ import co.edu.unbosque.formula1.model.TipoPenalizacion;
 import co.edu.unbosque.formula1.service.TipoPenalizacionService;
 
 @RestController
-@RequestMapping("/tipo-penalizacion")
-@CrossOrigin(origins = { "" })
+@RequestMapping("/tipoPenalizacion")
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class TipoPenalizacionController {
 
     @Autowired
@@ -59,10 +59,4 @@ public class TipoPenalizacionController {
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar tipo de penalización
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarTipoPenalizacion(@PathVariable int id) {
-        boolean eliminado = tipoPenalizacionService.eliminarTipoPenalizacion(id);
-        return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
-    }
 }

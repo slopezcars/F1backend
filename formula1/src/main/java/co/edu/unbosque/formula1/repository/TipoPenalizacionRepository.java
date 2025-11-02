@@ -105,20 +105,5 @@ public class TipoPenalizacionRepository {
             return false;
         }
     }
-
-    // Eliminar tipo de penalización
-    public boolean eliminarTipoPenalizacion(int id) {
-        String sql = "DELETE FROM tipo_penalizacion WHERE id_tipo_penalizacion = ?";
-
-        try (Connection connection = conexionDB.obtenerConexion();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, id);
-            return statement.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    
 }

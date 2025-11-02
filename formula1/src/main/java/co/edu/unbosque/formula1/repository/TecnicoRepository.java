@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.edu.unbosque.formula1.model.Empleado;
+import co.edu.unbosque.formula1.model.Especialidad;
 import co.edu.unbosque.formula1.model.Tecnico;
 
 @Repository
@@ -38,25 +40,41 @@ public class TecnicoRepository {
     // Obtener todos los técnicos
     public List<Tecnico> obtenerTodos() {
         List<Tecnico> tecnicos = new ArrayList<>();
-        String sql = "SELECT * FROM tecnico";
+        String sql = "SELECT t.id AS id_tecnico, t.id_especialidad, " +
+                     "e.id AS id_empleado, e.primer_nombre, e.primer_apellido, " +
+                     "e.fecha_nacimiento, e.id_nacionalidad, e.id_estado " +
+                     "FROM tecnico t " +
+                     "JOIN empleado e ON t.id_empleado = e.id";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                Tecnico tec = new Tecnico();
-                tec.setId(rs.getInt("id"));
-                tec.setIdEspecialidad(rs.getInt("id_especialidad"));
-                tecnicos.add(tec);
+                Tecnico t = new Tecnico();
+                t.setId(rs.getInt("id_tecnico"));
+                t.setIdEspecialidad(rs.getInt("id_especialidad"));
+
+                Empleado e = new Empleado();
+                e.setId(rs.getInt("id_empleado"));
+                e.setPrimerNombre(rs.getString("primer_nombre"));
+                e.setPrimerApellido(rs.getString("primer_apellido"));
+                e.setFechaNacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
+                e.setIdNacionalidad(rs.getInt("id_nacionalidad"));
+                e.setIdEstado(rs.getInt("id_estado"));
+
+                t.setEmpleado(e); // Asegúrate de tener: private Empleado empleado;
+
+                tecnicos.add(t);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
         return tecnicos;
     }
+
 
     // Buscar técnico por ID
     public Tecnico buscarPorId(int id) {
@@ -115,5 +133,66 @@ public class TecnicoRepository {
             e.printStackTrace();
             return false;
         }
+    }
+    
+ // Agregar una especialidad a un técnico
+    public boolean agregarEspecialidadATecnico(int idTecnico, int idEspecialidad) {
+        String sql = "INSERT INTO tec_esp (id_tecnico, id_especialidad) VALUES (?, ?)";
+        try (Connection con = conexionDB.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idTecnico);
+            ps.setInt(2, idEspecialidad);
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Eliminar una especialidad de un técnico
+    public boolean eliminarEspecialidadDeTecnico(int idTecnico, int idEspecialidad) {
+        String sql = "DELETE FROM tec_esp WHERE id_tecnico = ? AND id_especialidad = ?";
+        try (Connection con = conexionDB.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idTecnico);
+            ps.setInt(2, idEspecialidad);
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Mostrar todas las especialidades de un técnico
+    public List<Especialidad> obtenerEspecialidadesDeTecnico(int idTecnico) {
+        List<Especialidad> especialidades = new ArrayList<>();
+        String sql = """
+            SELECT e.id_especialidad, e.nombre
+            FROM tec_esp te
+            INNER JOIN especialidad e ON te.id_especialidad = e.id_especialidad
+            WHERE te.id_tecnico = ?
+        """;
+
+        try (Connection con = conexionDB.obtenerConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idTecnico);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Especialidad esp = new Especialidad();
+                    esp.setIdEspecialidad(rs.getInt("id_especialidad"));
+                    esp.setNombre(rs.getString("nombre"));
+                    especialidades.add(esp);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return especialidades;
     }
 }

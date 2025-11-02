@@ -30,7 +30,5 @@ public class ModeloService {
         return modeloRepository.editarModelo(modelo);
     }
 
-    public boolean eliminarModelo(int idModelo) {
-        return modeloRepository.eliminarModelo(idModelo);
-    }
+    
 }

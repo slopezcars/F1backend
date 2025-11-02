@@ -18,9 +18,9 @@ public class AutCirRepository {
     @Autowired
     private ConexionDB conexionDB;
 
-    // Crear un nuevo registro de AutCir
+    // Crear relación AutCir
     public boolean crearAutCir(AutCir autCir) {
-        String sql = "INSERT INTO aut_cir (id_sector, placa, velocidad) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO aut_cir (id_circuito, placa, velocidad) VALUES (?, ?, ?)";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -29,8 +29,7 @@ public class AutCirRepository {
             statement.setString(2, autCir.getPlaca());
             statement.setBigDecimal(3, autCir.getVelocidad());
 
-            int filasAfectadas = statement.executeUpdate();
-            return filasAfectadas > 0;
+            return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,8 +37,8 @@ public class AutCirRepository {
         }
     }
 
-    // Obtener todos los registros
-    public List<AutCir> obtenerTodos() {
+    // Obtener todas las relaciones
+    public List<AutCir> obtenerTodas() {
         List<AutCir> lista = new ArrayList<>();
         String sql = "SELECT * FROM aut_cir";
 
@@ -48,11 +47,11 @@ public class AutCirRepository {
              ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                AutCir autCir = new AutCir();
-                autCir.setIdCircuito(rs.getInt("id_sector"));
-                autCir.setPlaca(rs.getString("placa"));
-                autCir.setVelocidad(rs.getBigDecimal("velocidad"));
-                lista.add(autCir);
+                AutCir a = new AutCir();
+                a.setIdCircuito(rs.getInt("id_circuito"));
+                a.setPlaca(rs.getString("placa"));
+                a.setVelocidad(rs.getBigDecimal("velocidad"));
+                lista.add(a);
             }
 
         } catch (SQLException e) {
@@ -62,20 +61,21 @@ public class AutCirRepository {
         return lista;
     }
 
-    // Buscar por ID de sector
-    public AutCir buscarPorId(int idSector) {
-        String sql = "SELECT * FROM aut_cir WHERE id_sector = ?";
+    // Buscar relación por clave compuesta
+    public AutCir buscarPorId(int idCircuito, String placa) {
+        String sql = "SELECT * FROM aut_cir WHERE id_circuito = ? AND placa = ?";
         AutCir autCir = null;
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, idSector);
+            statement.setInt(1, idCircuito);
+            statement.setString(2, placa);
 
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     autCir = new AutCir();
-                    autCir.setIdCircuito(rs.getInt("id_sector"));
+                    autCir.setIdCircuito(rs.getInt("id_circuito"));
                     autCir.setPlaca(rs.getString("placa"));
                     autCir.setVelocidad(rs.getBigDecimal("velocidad"));
                 }
@@ -88,16 +88,16 @@ public class AutCirRepository {
         return autCir;
     }
 
-    // Editar un registro existente
+    // Editar relación
     public boolean editarAutCir(AutCir autCir) {
-        String sql = "UPDATE aut_cir SET placa = ?, velocidad = ? WHERE id_sector = ?";
+        String sql = "UPDATE aut_cir SET velocidad = ? WHERE id_circuito = ? AND placa = ?";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, autCir.getPlaca());
-            statement.setBigDecimal(2, autCir.getVelocidad());
-            statement.setInt(3, autCir.getIdCircuito());
+            statement.setBigDecimal(1, autCir.getVelocidad());
+            statement.setInt(2, autCir.getIdCircuito());
+            statement.setString(3, autCir.getPlaca());
 
             return statement.executeUpdate() > 0;
 
@@ -107,14 +107,15 @@ public class AutCirRepository {
         }
     }
 
-    // Eliminar un registro por ID de sector
-    public boolean eliminarAutCir(int idSector) {
-        String sql = "DELETE FROM aut_cir WHERE id_sector = ?";
+    // Eliminar relación
+    public boolean eliminarAutCir(int idCircuito, String placa) {
+        String sql = "DELETE FROM aut_cir WHERE id_circuito = ? AND placa = ?";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, idSector);
+            statement.setInt(1, idCircuito);
+            statement.setString(2, placa);
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {

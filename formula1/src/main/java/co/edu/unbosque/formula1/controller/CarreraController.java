@@ -12,7 +12,7 @@ import co.edu.unbosque.formula1.service.CarreraService;
 
 @RestController
 @RequestMapping("/carrera")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class CarreraController {
 
     @Autowired

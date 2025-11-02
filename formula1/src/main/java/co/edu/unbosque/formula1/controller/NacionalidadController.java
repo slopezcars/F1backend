@@ -59,11 +59,12 @@ public class NacionalidadController {
         return new ResponseEntity<>(editada, editada ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-
+/*
     // Eliminar nacionalidad
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Boolean> eliminarNacionalidad(@PathVariable int id) {
         boolean eliminada = nacionalidadService.eliminarNacionalidad(id);
         return new ResponseEntity<>(eliminada, eliminada ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
+    */
 }

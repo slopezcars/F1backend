@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.unbosque.formula1.model.Especialidad;
 import co.edu.unbosque.formula1.model.Tecnico;
 import co.edu.unbosque.formula1.repository.TecnicoRepository;
 
@@ -32,5 +33,16 @@ public class TecnicoService {
 
     public boolean eliminarTecnico(int id) {
         return tecnicoRepository.eliminarTecnico(id);
+    }
+    public boolean agregarEspecialidadATecnico(int idTecnico, int idEspecialidad) {
+        return tecnicoRepository.agregarEspecialidadATecnico(idTecnico, idEspecialidad);
+    }
+
+    public boolean eliminarEspecialidadDeTecnico(int idTecnico, int idEspecialidad) {
+        return tecnicoRepository.eliminarEspecialidadDeTecnico(idTecnico, idEspecialidad);
+    }
+
+    public List<Especialidad> obtenerEspecialidadesDeTecnico(int idTecnico) {
+        return tecnicoRepository.obtenerEspecialidadesDeTecnico(idTecnico);
     }
 }

@@ -30,7 +30,4 @@ public class MotorService {
         return motorRepository.editarMotor(motor);
     }
 
-    public boolean eliminarMotor(int idmotor) {
-        return motorRepository.eliminarMotor(idmotor);
-    }
 }

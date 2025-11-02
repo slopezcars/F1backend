@@ -31,7 +31,4 @@ public class ServicioService {
 		return servicioRepository.editarServicio(servicio);
 	}
 
-	public boolean eliminarServicio(int idServicio) {
-		return servicioRepository.eliminarServicio(idServicio);
-	}
 }

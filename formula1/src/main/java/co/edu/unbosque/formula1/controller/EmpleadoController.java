@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.EmpleadoService;
 
 @RestController
 @RequestMapping("/empleado")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class EmpleadoController {
 
     @Autowired
@@ -59,10 +59,14 @@ public class EmpleadoController {
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar empleado
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarEmpleado(@PathVariable int id) {
-        boolean eliminado = empleadoService.eliminarEmpleado(id);
-        return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+ // Cambiar estado de empleado (en lugar de eliminar)
+    @PutMapping("/cambiar-estado/{id}/{nuevoIdEstado}")
+    public ResponseEntity<Boolean> cambiarEstadoEmpleado(
+            @PathVariable int id,
+            @PathVariable int nuevoIdEstado) {
+
+        boolean exito = empleadoService.inactivarEmpleado(id, nuevoIdEstado);
+        return new ResponseEntity<>(exito, exito ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
+   
 }

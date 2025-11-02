@@ -1,6 +1,7 @@
 package co.edu.unbosque.formula1.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unbosque.formula1.model.Especialidad;
 import co.edu.unbosque.formula1.model.Tecnico;
 import co.edu.unbosque.formula1.service.TecnicoService;
 
 @RestController
 @RequestMapping("/tecnico")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class TecnicoController {
 
     @Autowired
@@ -64,5 +66,28 @@ public class TecnicoController {
     public ResponseEntity<Boolean> eliminarTecnico(@PathVariable int id) {
         boolean eliminado = tecnicoService.eliminarTecnico(id);
         return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+    }
+ // Asignar especialidad (con JSON simple)
+    @PostMapping("/asignar-especialidad")
+    public String agregarEspecialidad(@RequestBody Map<String, Integer> datos) {
+        int idTecnico = datos.get("idTecnico");
+        int idEspecialidad = datos.get("idEspecialidad");
+        tecnicoService.agregarEspecialidadATecnico(idTecnico, idEspecialidad);
+        return "Especialidad asignada correctamente";
+    }
+
+    // Eliminar especialidad (con JSON simple)
+    @DeleteMapping("/eliminar-especialidad")
+    public String eliminarEspecialidad(@RequestBody Map<String, Integer> datos) {
+        int idTecnico = datos.get("idTecnico");
+        int idEspecialidad = datos.get("idEspecialidad");
+        tecnicoService.eliminarEspecialidadDeTecnico(idTecnico, idEspecialidad);
+        return "Especialidad eliminada correctamente";
+    }
+
+    // Ver especialidades de un técnico
+    @GetMapping("/ver-especialidades/{idTecnico}")
+    public List<Especialidad> verEspecialidades(@PathVariable int idTecnico) {
+        return tecnicoService.obtenerEspecialidadesDeTecnico(idTecnico);
     }
 }

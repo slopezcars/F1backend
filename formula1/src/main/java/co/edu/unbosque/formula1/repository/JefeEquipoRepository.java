@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.edu.unbosque.formula1.model.Empleado;
 import co.edu.unbosque.formula1.model.JefeEquipo;
 
 @Repository
@@ -39,25 +40,41 @@ public class JefeEquipoRepository {
     // Obtener todos los jefes de equipo
     public List<JefeEquipo> obtenerTodos() {
         List<JefeEquipo> jefes = new ArrayList<>();
-        String sql = "SELECT * FROM jefe_equipo";
+        String sql = "SELECT j.id AS id_jefe, j.fecha_inicio, " +
+                     "e.id AS id_empleado, e.primer_nombre, e.primer_apellido, " +
+                     "e.fecha_nacimiento, e.id_nacionalidad, e.id_estado " +
+                     "FROM jefe_equipo j " +
+                     "JOIN empleado e ON j.id_empleado = e.id";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet rs = statement.executeQuery()) {
 
             while (rs.next()) {
-                JefeEquipo jefe = new JefeEquipo();
-                jefe.setId(rs.getInt("id"));
-                jefe.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
-                jefes.add(jefe);
+                JefeEquipo j = new JefeEquipo();
+                j.setId(rs.getInt("id_jefe"));
+                j.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+
+                Empleado e = new Empleado();
+                e.setId(rs.getInt("id_empleado"));
+                e.setPrimerNombre(rs.getString("primer_nombre"));
+                e.setPrimerApellido(rs.getString("primer_apellido"));
+                e.setFechaNacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
+                e.setIdNacionalidad(rs.getInt("id_nacionalidad"));
+                e.setIdEstado(rs.getInt("id_estado"));
+
+                j.setEmpleado(e); // Asegúrate de tener: private Empleado empleado;
+
+                jefes.add(j);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
 
         return jefes;
     }
+
 
     // Buscar jefe de equipo por ID
     public JefeEquipo buscarPorId(int id) {

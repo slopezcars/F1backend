@@ -100,7 +100,7 @@ public class NacionalidadRepository {
             return false;
         }
     }
-
+/*
     // Eliminar una nacionalidad por ID
     public boolean eliminarNacionalidad(int idNacionalidad) {
         String sql = "DELETE FROM nacionalidad WHERE id_nacionalidad = ?";
@@ -116,4 +116,5 @@ public class NacionalidadRepository {
             return false;
         }
     }
+    */
 }

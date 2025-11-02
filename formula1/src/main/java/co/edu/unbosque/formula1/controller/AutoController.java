@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.AutoService;
 
 @RestController
 @RequestMapping("/auto")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class AutoController {
 
     @Autowired

@@ -19,8 +19,8 @@ import co.edu.unbosque.formula1.model.PilCarr;
 import co.edu.unbosque.formula1.service.PilCarrService;
 
 @RestController
-@RequestMapping("/pilcarr")
-@CrossOrigin(origins = { "" })
+@RequestMapping("/pilCarr")
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class PilCarrController {
 
     @Autowired

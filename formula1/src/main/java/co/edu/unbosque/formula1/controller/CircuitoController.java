@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.CircuitoService;
 
 @RestController
 @RequestMapping("/circuito")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class CircuitoController {
 
     @Autowired
@@ -57,12 +57,5 @@ public class CircuitoController {
         circuito.setIdCircuito(id);
         boolean editado = circuitoService.editarCircuito(circuito);
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
-    }
-
-    // Eliminar circuito
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarCircuito(@PathVariable int id) {
-        boolean eliminado = circuitoService.eliminarCircuito(id);
-        return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }

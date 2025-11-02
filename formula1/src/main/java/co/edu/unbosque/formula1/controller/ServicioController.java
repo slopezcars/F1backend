@@ -21,7 +21,7 @@ import co.edu.unbosque.formula1.service.ServicioService;
 
 @RestController
 @RequestMapping("/servicio")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class ServicioController {
 
 	@Autowired
@@ -58,12 +58,5 @@ public class ServicioController {
 		servicio.setIdServicio(id);
 		boolean editado = servicioService.editarServicio(servicio);
 		return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
-	}
-
-	// Eliminar servicio
-	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<Boolean> eliminarServicio(@PathVariable int id) {
-		boolean eliminado = servicioService.eliminarServicio(id);
-		return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
 	}
 }

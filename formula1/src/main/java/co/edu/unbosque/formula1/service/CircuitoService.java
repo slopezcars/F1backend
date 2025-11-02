@@ -30,7 +30,4 @@ public class CircuitoService {
         return circuitoRepository.editarCircuito(circuito);
     }
 
-    public boolean eliminarCircuito(int idCircuito) {
-        return circuitoRepository.eliminarCircuito(idCircuito);
-    }
 }

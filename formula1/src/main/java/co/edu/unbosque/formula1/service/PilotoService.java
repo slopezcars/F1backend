@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.unbosque.formula1.model.Auto;
 import co.edu.unbosque.formula1.model.Piloto;
 import co.edu.unbosque.formula1.repository.PilotoRepository;
 
@@ -33,4 +34,20 @@ public class PilotoService {
     public boolean eliminarPiloto(int idPiloto) {
         return pilotoRepository.eliminarPiloto(idPiloto);
     }
+    public boolean asignarAutoAPiloto(int idPiloto, String placaAuto) {
+        return pilotoRepository.asignarAutoAPiloto(idPiloto, placaAuto);
+    }
+
+    public boolean eliminarAutoDePiloto(int idPiloto, String placaAuto) {
+        return pilotoRepository.eliminarAutoDePiloto(idPiloto, placaAuto);
+    }
+
+    public List<Auto> obtenerAutosDePiloto(int idPiloto) {
+        return pilotoRepository.obtenerAutosDePiloto(idPiloto);
+    }
+
+    public List<Piloto> obtenerPilotosDeAuto(String placaAuto) {
+        return pilotoRepository.obtenerPilotosDeAuto(placaAuto);
+    }
+
 }

@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.ModeloService;
 
 @RestController
 @RequestMapping("/modelo")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class ModeloController {
 
     @Autowired
@@ -59,10 +59,5 @@ public class ModeloController {
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar modelo
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarModelo(@PathVariable int id) {
-        boolean eliminado = modeloService.eliminarModelo(id);
-        return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
-    }
+   
 }

@@ -30,7 +30,4 @@ public class TipoPenalizacionService {
         return tipoPenalizacionRepository.editarTipoPenalizacion(tipo);
     }
 
-    public boolean eliminarTipoPenalizacion(int id) {
-        return tipoPenalizacionRepository.eliminarTipoPenalizacion(id);
-    }
 }

@@ -30,7 +30,7 @@ public class EmpleadoService {
         return empleadoRepository.editarEmpleado(empleado);
     }
 
-    public boolean eliminarEmpleado(int id) {
-        return empleadoRepository.eliminarEmpleado(id);
+    public boolean inactivarEmpleado(int idEmpleado, int nuevoIdEstado) {
+       return empleadoRepository.inactivarEmpleado(idEmpleado, nuevoIdEstado);
     }
 }

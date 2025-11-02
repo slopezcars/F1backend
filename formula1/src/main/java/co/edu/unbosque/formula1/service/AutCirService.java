@@ -18,19 +18,19 @@ public class AutCirService {
         return autCirRepository.crearAutCir(autCir);
     }
 
-    public List<AutCir> obtenerTodos() {
-        return autCirRepository.obtenerTodos();
+    public List<AutCir> obtenerTodas() {
+        return autCirRepository.obtenerTodas();
     }
 
-    public AutCir buscarPorId(int idSector) {
-        return autCirRepository.buscarPorId(idSector);
+    public AutCir buscarPorId(int idCircuito, String placa) {
+        return autCirRepository.buscarPorId(idCircuito, placa);
     }
 
     public boolean editarAutCir(AutCir autCir) {
         return autCirRepository.editarAutCir(autCir);
     }
 
-    public boolean eliminarAutCir(int idSector) {
-        return autCirRepository.eliminarAutCir(idSector);
+    public boolean eliminarAutCir(int idCircuito, String placa) {
+        return autCirRepository.eliminarAutCir(idCircuito, placa);
     }
 }

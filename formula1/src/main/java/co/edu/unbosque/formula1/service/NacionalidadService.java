@@ -29,8 +29,9 @@ public class NacionalidadService {
     public boolean editarNacionalidad(Nacionalidad nacionalidad) {
         return nacionalidadRepository.editarNacionalidad(nacionalidad);
     }
-
+/*
     public boolean eliminarNacionalidad(int idNacionalidad) {
         return nacionalidadRepository.eliminarNacionalidad(idNacionalidad);
     }
+    */
 }

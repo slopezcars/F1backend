@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.MotorService;
 
 @RestController
 @RequestMapping("/motor")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class MotorController {
 
     @Autowired
@@ -59,10 +59,5 @@ public class MotorController {
         return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar motor
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarMotor(@PathVariable int id) {
-        boolean eliminado = motorService.eliminarMotor(id);
-        return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
-    }
+    
 }

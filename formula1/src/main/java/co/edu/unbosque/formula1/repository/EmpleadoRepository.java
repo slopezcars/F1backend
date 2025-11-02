@@ -119,19 +119,48 @@ public class EmpleadoRepository {
         }
     }
 
-    // Eliminar empleado
-    public boolean eliminarEmpleado(int id) {
-        String sql = "DELETE FROM empleado WHERE id = ?";
+    public boolean inactivarEmpleado(int idEmpleado, int nuevoIdEstado) {
+        try (Connection connection = conexionDB.obtenerConexion()) {
 
-        try (Connection connection = conexionDB.obtenerConexion();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+            // Cambiar estado en empleado
+            String sqlEmpleado = "UPDATE empleado SET id_estado = ? WHERE id = ?";
+            try (PreparedStatement psEmpleado = connection.prepareStatement(sqlEmpleado)) {
+                psEmpleado.setInt(1, nuevoIdEstado);
+                psEmpleado.setInt(2, idEmpleado);
+                psEmpleado.executeUpdate();
+            }
 
-            statement.setInt(1, id);
-            return statement.executeUpdate() > 0;
+            // Cambiar estado en piloto
+            String sqlPiloto = "UPDATE piloto SET id_estado = ? WHERE id_empleado = ?";
+            try (PreparedStatement psPiloto = connection.prepareStatement(sqlPiloto)) {
+                psPiloto.setInt(1, nuevoIdEstado);
+                psPiloto.setInt(2, idEmpleado);
+                psPiloto.executeUpdate();
+            }
+
+            // Cambiar estado en tecnico
+            String sqlTecnico = "UPDATE tecnico SET id_estado = ? WHERE id_empleado = ?";
+            try (PreparedStatement psTecnico = connection.prepareStatement(sqlTecnico)) {
+                psTecnico.setInt(1, nuevoIdEstado);
+                psTecnico.setInt(2, idEmpleado);
+                psTecnico.executeUpdate();
+            }
+
+            // Cambiar estado en jefe
+            String sqlJefe = "UPDATE jefe SET id_estado = ? WHERE id_empleado = ?";
+            try (PreparedStatement psJefe = connection.prepareStatement(sqlJefe)) {
+                psJefe.setInt(1, nuevoIdEstado);
+                psJefe.setInt(2, idEmpleado);
+                psJefe.executeUpdate();
+            }
+
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
+
 }

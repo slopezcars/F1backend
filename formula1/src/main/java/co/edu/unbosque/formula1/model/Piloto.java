@@ -11,6 +11,16 @@ public class Piloto {
 		this.id = id;
 		this.numLicencia = numLicencia;
 	}
+	private Empleado empleado;
+
+	public Empleado getEmpleado() {
+	    return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+	    this.empleado = empleado;
+	}
+
 
 	public int getId() {
 		return id;

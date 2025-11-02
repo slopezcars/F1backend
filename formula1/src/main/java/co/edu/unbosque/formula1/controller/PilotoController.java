@@ -1,6 +1,7 @@
 package co.edu.unbosque.formula1.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unbosque.formula1.model.Auto;
 import co.edu.unbosque.formula1.model.Piloto;
 import co.edu.unbosque.formula1.service.PilotoService;
 
 @RestController
 @RequestMapping("/piloto")
-@CrossOrigin(origins = { "" })
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class PilotoController {
 
     @Autowired
@@ -64,5 +66,32 @@ public class PilotoController {
     public ResponseEntity<Boolean> eliminarPiloto(@PathVariable int id) {
         boolean eliminado = pilotoService.eliminarPiloto(id);
         return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+    }
+ // Asignar auto a piloto
+    @PostMapping("/asignar-auto")
+    public void asignarAuto(@RequestBody Map<String, Object> datos) {
+        int idPiloto = (int) datos.get("idPiloto");
+        String placa = (String) datos.get("placaAuto");
+        pilotoService.asignarAutoAPiloto(idPiloto, placa);
+    }
+
+    // Eliminar auto de piloto
+    @DeleteMapping("/eliminar-auto")
+    public void eliminarAuto(@RequestBody Map<String, Object> datos) {
+        int idPiloto = (int) datos.get("idPiloto");
+        String placa = (String) datos.get("placaAuto");
+        pilotoService.eliminarAutoDePiloto(idPiloto, placa);
+    }
+
+    // Ver autos de un piloto
+    @GetMapping("/ver-autos/{idPiloto}")
+    public List<Auto> verAutos(@PathVariable int idPiloto) {
+        return pilotoService.obtenerAutosDePiloto(idPiloto);
+    }
+
+    // Ver pilotos de un auto
+    @GetMapping("/ver-pilotos/{placaAuto}")
+    public List<Piloto> verPilotos(@PathVariable String placaAuto) {
+        return pilotoService.obtenerPilotosDeAuto(placaAuto);
     }
 }

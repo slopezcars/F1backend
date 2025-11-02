@@ -5,45 +5,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import co.edu.unbosque.formula1.model.AutCir;
 import co.edu.unbosque.formula1.service.AutCirService;
 
 @RestController
-@RequestMapping("/autcir")
-@CrossOrigin(origins = { "" })
+@RequestMapping("/autCir")
+@CrossOrigin(origins = { "http://localhost:8080" })
 public class AutCirController {
 
     @Autowired
     private AutCirService autCirService;
 
-    // Crear AutCir
     @PostMapping("/crear")
     public ResponseEntity<Boolean> crearAutCir(@RequestBody AutCir autCir) {
-        boolean creado = autCirService.crearAutCir(autCir);
-        return new ResponseEntity<>(creado, creado ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
+        boolean creada = autCirService.crearAutCir(autCir);
+        return new ResponseEntity<>(creada, creada ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
     }
 
-    // Obtener todos los registros
     @GetMapping("/listar")
-    public ResponseEntity<List<AutCir>> obtenerTodos() {
-        List<AutCir> lista = autCirService.obtenerTodos();
+    public ResponseEntity<List<AutCir>> obtenerTodas() {
+        List<AutCir> lista = autCirService.obtenerTodas();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
-    // Buscar por ID
-    @GetMapping("/buscar/{id}")
-    public ResponseEntity<AutCir> buscarPorId(@PathVariable int id) {
-        AutCir autCir = autCirService.buscarPorId(id);
+    @GetMapping("/buscar")
+    public ResponseEntity<AutCir> buscarPorId(@RequestParam int idCircuito, @RequestParam String placa) {
+        AutCir autCir = autCirService.buscarPorId(idCircuito, placa);
         if (autCir != null) {
             return new ResponseEntity<>(autCir, HttpStatus.OK);
         } else {
@@ -51,18 +40,15 @@ public class AutCirController {
         }
     }
 
-    // Editar
-    @PutMapping("/editar/{id}")
-    public ResponseEntity<Boolean> editarAutCir(@PathVariable int id, @RequestBody AutCir autCir) {
-        autCir.setIdCircuito(id);
-        boolean editado = autCirService.editarAutCir(autCir);
-        return new ResponseEntity<>(editado, editado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+    @PutMapping("/editar")
+    public ResponseEntity<Boolean> editarAutCir(@RequestBody AutCir autCir) {
+        boolean editada = autCirService.editarAutCir(autCir);
+        return new ResponseEntity<>(editada, editada ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-    // Eliminar
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarAutCir(@PathVariable int id) {
-        boolean eliminado = autCirService.eliminarAutCir(id);
-        return new ResponseEntity<>(eliminado, eliminado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+    @DeleteMapping("/eliminar")
+    public ResponseEntity<Boolean> eliminarAutCir(@RequestParam int idCircuito, @RequestParam String placa) {
+        boolean eliminada = autCirService.eliminarAutCir(idCircuito, placa);
+        return new ResponseEntity<>(eliminada, eliminada ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }
