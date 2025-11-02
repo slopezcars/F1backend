@@ -1,13 +1,16 @@
 package co.edu.unbosque.formula1.controller.report;
 
-import co.edu.unbosque.formula1.dto.PenalizacionPilotoDTO;
 import co.edu.unbosque.formula1.dto.PenalizacionCarreraDTO;
+import co.edu.unbosque.formula1.dto.PenalizacionPilotoDTO;
 import co.edu.unbosque.formula1.service.report.PenalizacionReportService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
+@RequestMapping("/report/penalizacion")
 public class PenalizacionReportController {
 
     private final PenalizacionReportService service;
@@ -16,13 +19,13 @@ public class PenalizacionReportController {
         this.service = service;
     }
 
-    @GetMapping("/reporte/penalizacion-piloto")
-    public List<PenalizacionPilotoDTO> getPenalizacionPiloto() {
+    @GetMapping("/piloto")
+    public List<PenalizacionPilotoDTO> obtenerPenalizacionPiloto() {
         return service.obtenerPenalizacionPiloto();
     }
 
-    @GetMapping("/reporte/penalizacion-carrera")
-    public List<PenalizacionCarreraDTO> getPenalizacionCarrera() {
+    @GetMapping("/carrera")
+    public List<PenalizacionCarreraDTO> obtenerPenalizacionCarrera() {
         return service.obtenerPenalizacionCarrera();
     }
 }

@@ -1,9 +1,10 @@
 package co.edu.unbosque.formula1.service.report;
 
-import co.edu.unbosque.formula1.dto.PenalizacionPilotoDTO;
 import co.edu.unbosque.formula1.dto.PenalizacionCarreraDTO;
+import co.edu.unbosque.formula1.dto.PenalizacionPilotoDTO;
 import co.edu.unbosque.formula1.repository.report.PenalizacionReportRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service

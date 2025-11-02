@@ -5,11 +5,13 @@ import co.edu.unbosque.formula1.dto.GanadorCircuitoDTO;
 import co.edu.unbosque.formula1.dto.ResumenCarreraDTO;
 import co.edu.unbosque.formula1.service.report.CircuitoReportService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/report/circuito")
 public class CircuitoReportController {
 
     private final CircuitoReportService service;
@@ -18,18 +20,18 @@ public class CircuitoReportController {
         this.service = service;
     }
 
-    @GetMapping("/reporte/rendimiento-circuito")
-    public List<RendimientoCircuitoDTO> getRendimientoCircuito() {
+    @GetMapping("/rendimiento")
+    public List<RendimientoCircuitoDTO> obtenerRendimientoCircuito() {
         return service.obtenerRendimientoCircuito();
     }
 
-    @GetMapping("/reporte/ganador-circuito")
-    public List<GanadorCircuitoDTO> getGanadorCircuito() {
+    @GetMapping("/ganador")
+    public List<GanadorCircuitoDTO> obtenerGanadorCircuito() {
         return service.obtenerGanadorCircuito();
     }
 
-    @GetMapping("/reporte/resumen-carrera")
-    public List<ResumenCarreraDTO> getResumenCarrera() {
+    @GetMapping("/resumen")
+    public List<ResumenCarreraDTO> obtenerResumenCarrera() {
         return service.obtenerResumenCarrera();
     }
 }

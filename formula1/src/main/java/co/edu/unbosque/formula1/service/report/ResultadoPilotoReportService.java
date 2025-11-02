@@ -3,16 +3,17 @@ package co.edu.unbosque.formula1.service.report;
 import co.edu.unbosque.formula1.dto.ResultadoPilotoDTO;
 import co.edu.unbosque.formula1.dto.ResumenRendimientoDTO;
 import co.edu.unbosque.formula1.dto.PodioPilotoDTO;
-import co.edu.unbosque.formula1.repository.report.ResultadoPilotoRepository;
+import co.edu.unbosque.formula1.repository.report.ResultadoPilotoReportRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
-public class ResultadoPilotoService {
+public class ResultadoPilotoReportService {
 
-    private final ResultadoPilotoRepository repository;
+    private final ResultadoPilotoReportRepository repository;
 
-    public ResultadoPilotoService(ResultadoPilotoRepository repository) {
+    public ResultadoPilotoReportService(ResultadoPilotoReportRepository repository) {
         this.repository = repository;
     }
 

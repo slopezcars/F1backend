@@ -4,6 +4,7 @@ import co.edu.unbosque.formula1.dto.RendimientoTecnicoDTO;
 import co.edu.unbosque.formula1.dto.AutoPorTecnicoDTO;
 import co.edu.unbosque.formula1.repository.report.TecnicoReportRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
