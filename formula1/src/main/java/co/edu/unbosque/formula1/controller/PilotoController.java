@@ -22,7 +22,7 @@ import co.edu.unbosque.formula1.service.PilotoService;
 
 @RestController
 @RequestMapping("/piloto")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class PilotoController {
 
     @Autowired

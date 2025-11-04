@@ -12,7 +12,7 @@ import co.edu.unbosque.formula1.service.AutCirService;
 
 @RestController
 @RequestMapping("/autCir")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class AutCirController {
 
     @Autowired

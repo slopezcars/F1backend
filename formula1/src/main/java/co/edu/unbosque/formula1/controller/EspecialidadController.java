@@ -12,7 +12,7 @@ import co.edu.unbosque.formula1.service.EspecialidadService;
 
 @RestController
 @RequestMapping("/especialidad")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class EspecialidadController {
 
     @Autowired

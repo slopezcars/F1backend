@@ -22,7 +22,7 @@ import co.edu.unbosque.formula1.service.TecnicoService;
 
 @RestController
 @RequestMapping("/tecnico")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class TecnicoController {
 
     @Autowired

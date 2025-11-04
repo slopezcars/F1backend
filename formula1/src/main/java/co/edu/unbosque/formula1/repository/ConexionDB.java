@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConexionDB {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/racedatav1";
+	private static final String URL = "jdbc:mysql://localhost:3306/formula1";
 	private static final String USURARIO = "root";
-	private static final String CONTRASENIA = "12345678";
+	private static final String CONTRASENIA = "LinaNino_13";
 
 	public Connection obtenerConexion() throws SQLException {
 		return DriverManager.getConnection(URL, USURARIO, CONTRASENIA);

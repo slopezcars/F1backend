@@ -14,7 +14,7 @@ import co.edu.unbosque.formula1.service.PenalizacionService;
 
 @RestController
 @RequestMapping("/penalizacion")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class PenalizacionController {
 
     @Autowired

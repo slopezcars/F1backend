@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.CircuitoService;
 
 @RestController
 @RequestMapping("/circuito")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class CircuitoController {
 
     @Autowired

@@ -21,7 +21,7 @@ public class AutoRepository {
 
     // Crear un nuevo auto
     public boolean crearAuto(Auto auto) {
-        String sql = "INSERT INTO auto (fecha_estreno, id_modelo, id_motor, numero_chasis) VALUES (?, ?, ?, ?)";
+    	String sql = "INSERT INTO auto (fecha_estreno, id_modelo, id_motor, numero_chasis, placa) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = conexionDB.obtenerConexion();
              PreparedStatement statement = connection.prepareStatement(sql)) {

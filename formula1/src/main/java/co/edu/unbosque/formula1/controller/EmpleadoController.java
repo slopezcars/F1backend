@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.EmpleadoService;
 
 @RestController
 @RequestMapping("/empleado")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class EmpleadoController {
 
     @Autowired

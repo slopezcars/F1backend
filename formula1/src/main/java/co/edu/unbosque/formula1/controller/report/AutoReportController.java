@@ -4,10 +4,13 @@ import co.edu.unbosque.formula1.dto.VelocidadAutoDTO;
 import co.edu.unbosque.formula1.dto.ServicioAutoDTO;
 import co.edu.unbosque.formula1.service.report.AutoReportService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("/report/auto")
+
 public class AutoReportController {
 
     private final AutoReportService service;

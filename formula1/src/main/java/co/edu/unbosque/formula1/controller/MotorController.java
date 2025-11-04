@@ -20,7 +20,7 @@ import co.edu.unbosque.formula1.service.MotorService;
 
 @RestController
 @RequestMapping("/motor")
-@CrossOrigin(origins = { "http://localhost:8080" })
+@CrossOrigin
 public class MotorController {
 
     @Autowired
